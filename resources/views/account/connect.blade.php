@@ -90,9 +90,9 @@
               <div class="box_body">
                 <i class="fab fa-facebook-f facebook-color"></i>
                 <h4 class="mb-2 nowrap">Facebook</h4>
-                <form action="{{ route('generate.access.token') }}" method="get">
+                <form action="" method="get">
                     @csrf
-                    <button type="submit">Connect</button>
+                    <button class="connect-btn" type="submit">Connect</button>
                 </form>
               </div>
             </div>

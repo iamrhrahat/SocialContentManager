@@ -17,4 +17,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Account Add and manage section start
+     Route::get('/connect-account', function(){
+        return view("account.connect");
+    })->name('account.connect');
+    Route::get('/manage-account', function(){
+        return view("account.manage");
+    })->name('account.manage');
+// Account Add and manage section end
+
+// Post Add and manage section start
+    Route::get('/create-post', function(){
+        return view("posts.create");
+    })->name('post.create');
+// Post Add and manage section start
 require __DIR__.'/auth.php';
