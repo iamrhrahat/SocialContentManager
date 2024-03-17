@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,10 @@ Route::middleware('auth')->group(function () {
         return view("account.manage");
     })->name('account.manage');
 // Account Add and manage section end
-
+Route::group(['prefix' => 'auth/facebook', 'middleware' => 'auth'], function () {
+    Route::get('/', [FacebookController::class, 'redirectToProvider'])->name('facebook.connect');
+    Route::get('/callback', [FacebookController::class, 'handleProviderCallback']);
+});
 // Post Add and manage section start
     Route::get('/create-post', function(){
         return view("posts.create");

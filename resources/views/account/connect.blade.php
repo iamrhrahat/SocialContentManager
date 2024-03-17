@@ -90,7 +90,7 @@
               <div class="box_body">
                 <i class="fab fa-facebook-f facebook-color"></i>
                 <h4 class="mb-2 nowrap">Facebook</h4>
-                <form action="" method="get">
+                <form action="{{route('facebook.connect')}}" method="get">
                     @csrf
                     <button class="connect-btn" type="submit">Connect</button>
                 </form>
