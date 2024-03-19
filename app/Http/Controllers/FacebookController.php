@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Providers\FacebookRepository;
+use Carbon\Carbon;
 use Exception;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
@@ -62,10 +63,27 @@ class FacebookController extends Controller
 
             // Access token is present in the successful response JSON
             $accessToken = $response->json()['access_token'];
+            $response = Http::get('https://graph.facebook.com/v19.0/me/accounts?fields=id,name&access_token=' . $accessToken);
 
+            $pages = $response->json()['data'];
+
+            foreach ($pages as $page) {
+                $pageId = $page['id'];
+                $pageName = $page['name'];
+
+                // Create or update FacebookPage model instance
+                $facebookPage = FacebookPage::updateOrCreate(
+                    ['page_id' => $pageId],
+                    [
+                        'user_id' => Auth::id(), // Assuming you have user auth mechanism
+                        'access_token' => $accessToken,
+                        'page_name' => $pageName,
+                        'expires_at' => Carbon::now()->addDays(55), // Example: Set expiration 55 days from now
+                    ]
+                );
+            }
             // Store access token securely (e.g., user session or database)
             // You'll need to implement logic for secure storage based on your application
-dd($accessToken);
             // Redirect to the '/pages' route or desired location
             return redirect()->route('account.manage');
 
