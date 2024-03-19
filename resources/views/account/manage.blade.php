@@ -13,7 +13,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Account Name</th>
+                                <th>Pages Name</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -25,7 +25,7 @@
                             @foreach ($pages as $page)
                             <tr>
                                 <td>{{ $page->id }}</td>
-                                <td>{{ $page->page_name }}</td>
+                                <td><i class="fab fa-facebook-f facebook-color"></i>  {{ $page->page_name }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
