@@ -1,5 +1,6 @@
 @extends('layout')
 @section('content')
+
 <div class="main_content_iner ">
     <div class="container-fluid p-0 sm_padding_15px">
     <div class="row justify-content-center">
@@ -17,9 +18,12 @@
                             </tr>
                         </thead>
                         <tbody>
+
+
+                            @foreach ($accessToken as $setting)
                             <tr>
                                 <td>1</td>
-                                <td>Account 1</td>
+                                <td>{{ $setting['access_token'] }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,6 +36,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                             <tr>
                                 <td>2</td>
                                 <td>Account 2</td>

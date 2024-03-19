@@ -5,34 +5,36 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
+use Laravel\Socialite\Facades\Socialite;
 use Mockery\CountValidator\Exception;
-use Illuminate\Support\Facades\Log;
 use Facebook\Facebook;
 
 class FacebookRepository extends ServiceProvider
-{
-    protected $facebook;
+{   protected $facebook;
 
     public function __construct()
     {
         $this->facebook = new Facebook([
             'app_id' => config('providers.facebook.app_id'),
             'app_secret' => config('providers.facebook.app_secret'),
-            'default_graph_version' => config('default_graph_version'),
+            'default_graph_version' => config('provider.facebook.default_graph_version'),
         ]);
     }
+
     public function redirectTo()
     {
-        $helper = $this->facebook->getRedirectLoginHelper();
-
-        $permissions = [
+        $scopes = [
+            'pages_show_list',
             'pages_manage_posts',
-            'pages_read_engagement'
+            'pages_read_engagement',
+            'pages_manage_metadata',
+            'public_profile',
+            'catalog_management'
         ];
 
-        $redirectUri = config('app.url') . '/auth/facebook/callback';
-
-        return $helper->getLoginUrl($redirectUri, $permissions);
+        return Socialite::driver('facebook')
+            ->scopes($scopes)
+            ->redirect();
     }
 
     public function handleCallback()

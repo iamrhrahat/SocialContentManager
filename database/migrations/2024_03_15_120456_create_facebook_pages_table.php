@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('facebook_pages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('page_id')->unique();
-            $table->string('name');
-            $table->text('access_token');
+            $table->string('access_token');
+            $table->string('page_id');
+            $table->string('page_name');
+            $table->dateTime('expires_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

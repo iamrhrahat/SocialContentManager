@@ -4,9 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FacebookPage extends Model
 {
     use HasFactory;
-    protected $fillable = ['page_id', 'name', 'access_token'];
+
+    protected $fillable = ['user_id', 'access_token', 'page_id', 'page_name', 'expires_at'];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class); // Assuming your user model is named 'User'
+    }
 }
