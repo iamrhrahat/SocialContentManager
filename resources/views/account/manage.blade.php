@@ -17,13 +17,15 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
+                            <?php
+                            $pages= \App\Models\FacebookPage::all();
+                            ?>
+                        @if ($pages)
                         <tbody>
-
-
-                            @foreach ($accessToken as $setting)
+                            @foreach ($pages as $page)
                             <tr>
-                                <td>1</td>
-                                <td>{{ $setting['access_token'] }}</td>
+                                <td>{{ $page->id }}</td>
+                                <td>{{ $page->page_name }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -37,22 +39,11 @@
                                 </td>
                             </tr>
                             @endforeach
-                            <tr>
-                                <td>2</td>
-                                <td>Account 2</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Actions
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Edit</a></li>
-                                            <li><a class="dropdown-item" href="#">Delete</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+
                         </tbody>
+                        @else
+    <p>No Facebook pages found.</p>
+@endif
                     </table>
 
                   </div>
@@ -70,6 +61,49 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-page');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const pageId = this.dataset.id;
+                const confirmation = confirm('Are you sure you want to delete this page?');
+
+                if (confirmation) {
+                    deletePage(pageId);
+                }
+            });
+        });
+
+        function deletePage(pageId) {
+            fetch(`/facebook/pages/${pageId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest' // Add this header to work with Symfony's CSRF protection
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle success
+                alert(data.message); // Show a success message
+                // Optionally, you can remove the deleted row from the table
+                // const row = document.querySelector(`tr[data-id="${pageId}"]`);
+                // if (row) row.remove();
+            })
+            .catch(error => {
+                // Handle error
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        }
+    });
+</script>
 <script>
   $(document).ready(function() {
     $('#DataTables_Table_0').DataTable({

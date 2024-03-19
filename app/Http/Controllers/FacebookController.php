@@ -93,6 +93,13 @@ class FacebookController extends Controller
             return redirect()->route('account.connect')->with('error', 'An error occurred during Facebook callback');
         }
     }
+    public function manage()
+    {
+        $user = Auth::user(); // Assuming user auth mechanism
+        $pages = $user->facebookPages; // Assuming relationship is defined in User model
+
+        return view('account.manage', compact('pages')); // Pass $pages to the view
+    }
 
     public function showPages()
     {
