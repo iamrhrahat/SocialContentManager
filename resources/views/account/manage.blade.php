@@ -24,7 +24,7 @@
                         <tbody>
                             @foreach ($pages as $page)
                             <tr>
-                                <td>{{ $page->id }}</td>
+                                <td>{{ $page->page_id }}</td>
                                 <td><i class="fab fa-facebook-f facebook-color"></i>  {{ $page->page_name }}</td>
                                 <td>
                                     <div class="btn-group">
