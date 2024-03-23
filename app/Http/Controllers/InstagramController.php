@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FacebookPage;
 use App\Models\InstagramAccount;
+use App\Models\SocialID;
 use App\Providers\FacebookRepository;
 use Carbon\Carbon;
 use Facebook\Facebook;
@@ -81,10 +82,11 @@ class InstagramController extends Controller
                     }
 
                     // Store or update InstagramPage model instance
-                    InstagramAccount::updateOrCreate(
+                    SocialID::updateOrCreate(
                         ['page_id' => $instagramPageId],
                         [
                             'user_id' => Auth::id(),
+                            'social_id' => 2,
                             'access_token' => $accessToken,
                             'page_name' => $instagramPageName,
                             'expires_at' => Carbon::now()->addDays(55)
@@ -94,7 +96,7 @@ class InstagramController extends Controller
             }
 
             // Redirect or respond with success message
-            return redirect()->route('account.connect');
+            return redirect()->route('account.manage');
         } catch (\Exception $e) {
             // Handle exceptions
             return redirect()->route('account.connect')->with('error', 'An error occurred during Instagram callback');

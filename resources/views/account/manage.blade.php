@@ -18,32 +18,54 @@
                             </tr>
                         </thead>
                             <?php
-                            $pages= \App\Models\FacebookPage::all();
+                            $pages= \App\Models\SocialID::all();
                             ?>
-                        @if ($pages)
-                        <tbody>
-                            @foreach ($pages as $page)
-                            <tr>
-                                <td>{{ $page->page_id }}</td>
-                                <td><i class="fab fa-facebook-f facebook-color"></i>  {{ $page->page_name }}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Actions
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Edit</a></li>
-                                            <li><a class="dropdown-item" href="#">Delete</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
+                       @if ($pages)
+                       <tbody>
+                         @foreach ($pages as $page)
+                           <tr>
+                             <td>{{ $page->page_id }}</td>
+                             <td>
+                               @switch($page->social_id)
+                                 @case(1)
+                                   <i class="fab fa-facebook-f facebook-color"></i>
+                                   @break
+                                 @case(2)
+                                   <i class="fab fa-instagram instagram-color"></i>
+                                   @break
+                                 @case(3)
+                                   <i class="fab fa-pinterest pinterest-color"></i>
+                                   @break
+                                 @case(4)
+                                   <i class="fab fa-tiktok tiktok-color"></i>
+                                   @break
+                                 @case(5)
+                                   <i class="fab fa-google my-business-color"></i> @break
+                                 @case(6)
+                                   <i class="fab fa-yelp yelp-color"></i>
+                                   @break
+                                 @default
+                                   <i class="fas fa-question-circle"></i> @endswitch
+                               {{ $page->page_name }}
+                             </td>
+                             <td>
+                               <div class="btn-group">
+                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                   Actions
+                                 </button>
+                                 <ul class="dropdown-menu">
+                                   <li><a class="dropdown-item" href="#">Edit</a></li>
+                                   <li><a class="dropdown-item" href="#">Delete</a></li>
+                                 </ul>
+                               </div>
+                             </td>
+                           </tr>
+                         @endforeach
+                       </tbody>
+                     @else
+                       <p>No Facebook pages found.</p>
+                     @endif
 
-                        </tbody>
-                        @else
-    <p>No Facebook pages found.</p>
-@endif
                     </table>
 
                   </div>

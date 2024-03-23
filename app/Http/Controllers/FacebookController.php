@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SocialID;
 use App\Providers\FacebookRepository;
 use Carbon\Carbon;
 use Exception;
@@ -36,7 +37,7 @@ class FacebookController extends Controller
     }
 
 
-    public function handleFacebookCoallback(Request $request)
+    public function handleFacebookCallback(Request $request)
     {
         // Extract authorization code from the request
         $authorizationCode = $request->query('code');
@@ -67,10 +68,11 @@ class FacebookController extends Controller
                 $pageName = $page['name'];
 
                 // Create or update FacebookPage model instance
-                $facebookPage = FacebookPage::updateOrCreate(
+                $facebookPage = SocialID::updateOrCreate(
                     ['page_id' => $pageId],
                     [
                         'user_id' => Auth::id(), // Assuming you have user auth mechanism
+                        'social_id' => 1,
                         'access_token' => $accessToken,
                         'page_name' => $pageName,
                         'expires_at' => Carbon::now()->addDays(55), // Example: Set expiration 55 days from now
