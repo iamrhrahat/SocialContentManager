@@ -20,12 +20,7 @@ use Session;
 
 class FacebookController extends Controller
 {
-    protected $facebook;
 
-    public function __construct()
-    {
-        $this->facebook = new FacebookRepository();
-    }
 
     public function redirectToFacebook()
     {
@@ -41,7 +36,7 @@ class FacebookController extends Controller
     }
 
 
-    public function handleFacebookCallback(Request $request)
+    public function handleFacebookCoallback(Request $request)
     {
         // Extract authorization code from the request
         $authorizationCode = $request->query('code');

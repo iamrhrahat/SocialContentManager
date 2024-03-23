@@ -101,7 +101,10 @@
               <div class="box_body">
                 <i class="fab fa-instagram instagram-color"></i>
                 <h4 class="mb-2 nowrap">Instagram</h4>
-                <button class="connect-btn">Connect</button>
+                <form action="{{route('instagram.connect')}}" method="get">
+                    @csrf
+                    <button class="connect-btn" type="submit">Connect</button>
+                </form>
               </div>
             </div>
 

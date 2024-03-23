@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\InstagramController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,12 @@ Route::middleware('auth')->group(function () {
 Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook'])->name('facebook.connect');;
 Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
 // Post Add and manage section start
-    Route::get('/create-post', function(){
+
+Route::group(['prefix' => 'auth/instagram'], function () {
+    Route::get('/', [InstagramController::class, 'redirectToInstagram'])->name('instagram.connect');
+    Route::get('/callback', [InstagramController::class, 'handleProviderCallback'])->name('instagram.callback');
+});
+Route::get('/create-post', function(){
         return view("posts.create");
     })->name('post.create');
     Route::get('/pages', function(){

@@ -7,13 +7,13 @@
         <div class="container">
             <div class="card_box box_shadow position-relative mb_30">
               <div class="box_body">
-                <div class="QA_table mb_30">
+                <div class="QA_table mb_10">
                   <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
                     <table class="table table-bordered table-striped" id="pageTable">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Pages Name</th>
+                                <th>Account Name</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

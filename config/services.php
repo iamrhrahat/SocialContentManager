@@ -30,6 +30,13 @@ return [
         'client_id' => env('FACEBOOK_APP_ID'), // Replace with your App ID
         'client_secret' => env('FACEBOOK_APP_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT_URI'), // Redirect URI
+        'iredirect' => env('INSTAGRAM_REDIRECT_URI'),
+    ],
+    'instagram' => [
+        'client_id' => env('INSTAGRAM_CLIENT_ID'), // Replace with your App ID
+        'client_secret' => env('INSTAGRAM_CLIENT_SECRET'),
+        'redirect' => env('INSTAGRAM_REDIRECT_URI'), // Redirect URI
+        'default_graph_version'=> env('DEFAULT_GRAPH_VERSION'),
     ],
 
 

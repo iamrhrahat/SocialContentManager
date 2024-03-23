@@ -22,21 +22,25 @@ class FacebookRepository extends ServiceProvider
     }
 
     public function redirectTo()
-    {
-        $scopes = [
-            'pages_show_list',
-            'pages_manage_posts',
-            'pages_read_engagement',
-            'pages_manage_metadata',
-            'public_profile',
-            'catalog_management'
-        ];
+{
+    $helper = $this->facebook->getRedirectLoginHelper();
 
-        return Socialite::driver('facebook')
-            ->scopes($scopes)
-            ->redirect();
-    }
+    $permissions = [
+        'manage_pages',
+                'pages_show_list',
+                'instagram_basic',
+                'instagram_content_publish',
+                'pages_read_user_content',
+                'pages_manage_ads',
+                'pages_manage_engagement',
+                'pages_manage_metadata',
+                'pages_read_engagement'
+    ];
 
+    $redirectUri = config('app.url') . '/auth/instagram/callback';
+
+    return $helper->getLoginUrl($redirectUri, $permissions);
+}
     public function handleCallback()
     {
         $helper = $this->facebook->getRedirectLoginHelper();
