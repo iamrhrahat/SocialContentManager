@@ -9,7 +9,7 @@ class SocialID extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'social_id', 'access_token', 'page_id', 'page_name', 'expires_at'];
+    protected $fillable = ['user_id', 'social_id', 'access_token', 'refresh_token', 'page_id', 'page_name', 'address', 'expires_at'];
 
 
     public function user()

@@ -6,13 +6,17 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "bronhy/google-my-business-php-client": "^4.9",
         "facebook/graph-sdk": "^5.1",
+        "google/apiclient": "^2.15",
         "guzzlehttp/guzzle": "^7.8",
         "laravel/breeze": "^2.0",
         "laravel/framework": "^11.0",
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.9",
-        "socialiteproviders/facebook": "^4.1"
+        "league/oauth2-client": "^2.7",
+        "socialiteproviders/facebook": "^4.1",
+        "waleedahmad/pinterest-laravel": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

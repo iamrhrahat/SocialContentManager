@@ -37,6 +37,11 @@ return [
         'redirect' => env('INSTAGRAM_REDIRECT_URI'), // Redirect URI
         'default_graph_version'=> env('DEFAULT_GRAPH_VERSION'),
     ],
+    'pinterest' => [
+        'client_id' => env('PINTEREST_CLIENT_ID'), // Replace with your App ID
+        'client_secret' => env('PINTEREST_CLIENT_SECRET'),
+        'redirect' => env('PINTEREST_REDIRECT_URI'),
+    ],
 
 
 

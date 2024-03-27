@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\GMBController;
 use App\Http\Controllers\InstagramController;
+use App\Http\Controllers\PinterestController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +37,17 @@ Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebook
 Route::group(['prefix' => 'auth/instagram'], function () {
     Route::get('/', [InstagramController::class, 'redirectToInstagram'])->name('instagram.connect');
     Route::get('/callback', [InstagramController::class, 'handleProviderCallback'])->name('instagram.callback');
+});
+
+Route::group(['prefix' => 'auth/pinterest'], function () {
+    Route::get('/', [PinterestController::class, 'redirectToPinterest'])->name('pinterest.connect');
+    Route::get('/callback', [PinterestController::class, 'handlePinterestCallback'])->name('pinterest.callback');
+});
+
+Route::group(['prefix' => 'auth/google'], function () {
+    Route::get('/', [GMBController::class, 'redirectToGoogle'])->name('google.connect');
+    Route::get('/callback', [GMBController::class, 'handleGoogleCallback'])->name('google.callback');
+    Route::get('/gmb', 'GMBController@manageGMB')->middleware('auth');
 });
 Route::get('/create-post', function(){
         return view("posts.create");

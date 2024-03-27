@@ -7,7 +7,7 @@
     </div>
     <ul id="sidebar_menu">
     <li class="mm-active">
-    <a class="" href="/dashboard" aria-expanded="false">
+    <a class="" href="{{route('dashboard')}}" aria-expanded="false">
     <div class="icon_menu">
     <img src="{{asset ('assets/menu-icon/dashboard.svg')}}" alt>
     </div>

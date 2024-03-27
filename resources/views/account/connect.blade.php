@@ -112,7 +112,10 @@
               <div class="box_body">
                 <i class="fab fa-pinterest-p pinterest-color"></i>
                 <h4 class="mb-2 nowrap">Pinterest</h4>
-                <button class="connect-btn">Connect</button>
+                <form action="{{route('pinterest.connect')}}" method="get">
+                    @csrf
+                    <button class="connect-btn" type="submit">Connect</button>
+                </form>
               </div>
             </div>
 
@@ -128,7 +131,10 @@
               <div class="box_body">
                 <i class="fab fa-google google-color"></i>
                 <h4 class="mb-2 nowrap">GMB</h4>
-                <button class="connect-btn">Connect</button>
+                <form action="{{route('google.connect')}}" method="get">
+                    @csrf
+                    <button class="connect-btn" type="submit">Connect</button>
+                </form>
               </div>
             </div>
 

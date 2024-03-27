@@ -16,8 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('social_id');
             $table->string('access_token');
+            $table->string('refresh_token')->nullable();
             $table->string('page_id');
             $table->string('page_name');
+            $table->string('address')->nullable();
             $table->dateTime('expires_at')->nullable();
             $table->timestamps();
 
